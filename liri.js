@@ -19,6 +19,10 @@ switch(params[0]){
 	myTweets()
 	break;
 
+	case "do-what-it-says":
+	doWhatItSays()
+	break;
+
 	default:
 		console.log("err");
 }
@@ -112,6 +116,7 @@ function myTweets(){
 
 function doWhatItSays(){
 	fs.readFile("random.txt", "utf8", function(error, data){
-		
+		data = data.split(",");
+		spotifySongs(data[1])
 	});
 };
