@@ -55,31 +55,37 @@ function getMovie(){
 	}
 };
 
-function spotifySongs(){
+function spotifySongs(arg){
 	if(params[1] === undefined){
-		spotify.search({ type: 'track', query: params[1]}, function(err, data) {
+		spotify.search({ type: 'track', query: "What's My Age Again?"}, function(err, data) {
 	    if ( err ) {
 	        console.log('Error occurred: ' + err);
 	        return;
 	    }
-	 		var songInfo = "Track Title: " + data.tracks.items[0].name + "\r\n"
-	 									 "Artist: " + data.tracks.items[0].artists[0].name;
-	    console.log(data); 
+	 		var songInfo = "Artist: " + data.tracks.items[0].artists[0].name + "\r\n" +
+	 									 "Track Title: " + data.tracks.items[0].name + "\r\n" +
+	 									 "Preview Link: " + data.tracks.items[0].external_urls.spotify + "\r\n" +
+	 									 "Album Name: " + data.tracks.items[0].album.name + "\r\n";
+	    console.log(songInfo);
+	    return; 
 		})
 	}
-} 
-// else {
-// 	spotify.search({ type: 'track', query: params[1]}, function(err, data) {
-// 	    if ( err ) {
-// 	        console.log('Error occurred: ' + err);
-// 	        return;
-// 	    }
-// 	 		var songInfo = "Track Title: " + data.tracks.items[0].name + "\r\n"
-// 	 									 "Artist: " + data.tracks.items[0].artists[0].name;
-// 	    console.log(songInfo); 
-// 		})
-// 	}
-// }
+	else {
+			spotify.search({ type: 'track', query: params[1]}, function(err, data) {
+		    if ( err ) {
+		        console.log('Error occurred: ' + err);
+		        return;
+		    }
+		 		var songInfo = "Artist: " + data.tracks.items[0].artists[0].name + "\r\n" +
+		 									 "Track Title: " + data.tracks.items[0].name + "\r\n" +
+		 									 "Preview Link: " + data.tracks.items[0].external_urls.spotify + "\r\n" +
+		 									 "Album Name: " + data.tracks.items[0].album.name + "\r\n";
+		    console.log(songInfo);
+		    return; 
+		})
+	}
+};
+
 // fs.readFile("keys.js", "utf8", function(error, data){
 
 // });
