@@ -110,6 +110,9 @@ function myTweets(){
 	});
 }
 
-// fs.readFile("keys.js", "utf8", function(error, data){
-
-// });
+function doWhatItSays(){
+	fs.readFile("random.txt", "utf8", function(error, data){
+		data = data.split(",");
+		spotifySongs(data[1])
+	});
+};
