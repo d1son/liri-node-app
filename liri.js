@@ -1,6 +1,6 @@
 var fs = require("fs");
-// var keys = require("keys");
-var twitter = require('./keys.js');
+var keys = require("./keys.js");
+var Twitter = require("twitter");
 var spotify = require("spotify");
 var request = require("request");
 
@@ -13,6 +13,10 @@ switch(params[0]){
 
 	case "spotify-this":
 	spotifySongs()
+	break;
+
+	case "my-tweets":
+	myTweets()
 	break;
 
 	default:
@@ -86,7 +90,25 @@ function spotifySongs(){
 	}
 };
 
+function myTweets(){
+	var client = new Twitter({
+	  consumer_key: keys.twitterKeys.consumer_key,
+	  consumer_secret: keys.twitterKeys.consumer_secret,
+	  access_token_key: keys.twitterKeys.access_token_key,
+	  access_token_secret: keys.twitterKeys.access_token_secret,
+	});
 
+	client.get('statuses/user_timeline', {screen_name: "dson120"}, function(error, data, response){
+			if (error){
+				console.log(error);
+				return;
+			}
+			for (i = 0; i < data.length; i++){
+			var tweetInfo = data[i].text + "\r\n" + data[i].created_at;
+		  console.log(tweetInfo);
+		}
+	});
+}
 
 // fs.readFile("keys.js", "utf8", function(error, data){
 
