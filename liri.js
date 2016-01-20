@@ -1,6 +1,6 @@
 var fs = require("fs");
 // var keys = require("keys");
-// var twitter = require('twitter');
+var twitter = require('./keys.js');
 var spotify = require("spotify");
 var request = require("request");
 
@@ -55,7 +55,7 @@ function getMovie(){
 	}
 };
 
-function spotifySongs(arg){
+function spotifySongs(){
 	if(params[1] === undefined){
 		spotify.search({ type: 'track', query: "What's My Age Again?"}, function(err, data) {
 	    if ( err ) {
@@ -85,6 +85,8 @@ function spotifySongs(arg){
 		})
 	}
 };
+
+
 
 // fs.readFile("keys.js", "utf8", function(error, data){
 
