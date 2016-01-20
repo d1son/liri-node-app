@@ -1,7 +1,7 @@
 var fs = require("fs");
 // var keys = require("keys");
 // var twitter = require('twitter');
-// var spotify = require("spotify");
+var spotify = require("spotify");
 var request = require("request");
 
 var params = process.argv.slice(2);
@@ -9,6 +9,10 @@ var params = process.argv.slice(2);
 switch(params[0]){
 	case "movie-this":
 	getMovie();
+	break;
+
+	case "spotify-this":
+	spotifySongs()
 	break;
 
 	default:
@@ -49,9 +53,33 @@ function getMovie(){
 			}
 		})
 	}
+};
+
+function spotifySongs(){
+	if(params[1] === undefined){
+		spotify.search({ type: 'track', query: params[1]}, function(err, data) {
+	    if ( err ) {
+	        console.log('Error occurred: ' + err);
+	        return;
+	    }
+	 		var songInfo = "Track Title: " + data.tracks.items[0].name + "\r\n"
+	 									 "Artist: " + data.tracks.items[0].artists[0].name;
+	    console.log(data); 
+		})
+	}
 } 
-
-
+// else {
+// 	spotify.search({ type: 'track', query: params[1]}, function(err, data) {
+// 	    if ( err ) {
+// 	        console.log('Error occurred: ' + err);
+// 	        return;
+// 	    }
+// 	 		var songInfo = "Track Title: " + data.tracks.items[0].name + "\r\n"
+// 	 									 "Artist: " + data.tracks.items[0].artists[0].name;
+// 	    console.log(songInfo); 
+// 		})
+// 	}
+// }
 // fs.readFile("keys.js", "utf8", function(error, data){
 
 // });
